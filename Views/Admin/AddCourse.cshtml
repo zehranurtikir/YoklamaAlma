@@ -1,0 +1,64 @@
+@{
+    ViewData["Title"] = "Ders Ekle";
+}
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1 class="admin-title">Ders Ekle</h1>
+        <p class="admin-subtitle">Sisteme yeni bir ders kaydı oluşturun</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form class="course-form" method="post" action="/Admin/AddCourse">
+                <div class="row">
+                    <!-- Ders Kodu -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="courseCode" class="form-label">Ders Kodu</label>
+                            <input type="text" class="form-control" id="courseCode" name="courseCode" required
+                                   placeholder="Örn: YBS101">
+                        </div>
+                    </div>
+
+                    <!-- Ders Adı -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="courseName" class="form-label">Ders Adı</label>
+                            <input type="text" class="form-control" id="courseName" name="courseName" required
+                                   placeholder="Dersin tam adını giriniz">
+                        </div>
+                    </div>
+
+                    <!-- Kredi Sayısı -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="credits" class="form-label">Kredi Sayısı</label>
+                            <input type="number" class="form-control" id="credits" name="credits" required
+                                   min="1" max="30" placeholder="Kredi sayısını giriniz">
+                        </div>
+                    </div>
+
+                    <!-- Dönem -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="semester" class="form-label">Dönem</label>
+                            <select class="form-select" id="semester" name="semester" required>
+                                <option value="">Seçiniz</option>
+                                <option value="Güz">Güz</option>
+                                <option value="Bahar">Bahar</option>
+                                <option value="Yaz">Yaz</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Kaydet
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 

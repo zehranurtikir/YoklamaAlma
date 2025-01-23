@@ -1,0 +1,82 @@
+@model IEnumerable<YoklamaAlma.Models.StudentCourse>
+
+@{
+    ViewData["Title"] = "Yoklama";
+}
+
+<div class="student-container">
+    <div class="student-header">
+        <h1 class="student-title">Yoklama</h1>
+        <p class="student-subtitle">Bugünkü dersleriniz için yoklama alabilirsiniz</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            @if (Model != null && Model.Any())
+            {
+                <form class="attendance-form" method="post" action="/Student/MarkAttendance">
+                    <div class="today-classes">
+                        <h2 class="section-title mb-4">Bugünkü Dersler</h2>
+                        
+                        @foreach (var studentCourse in Model)
+                        {
+                            <div class="class-item">
+                                <div class="class-info">
+                                    <div class="course-name">@studentCourse.Course.CourseName (@studentCourse.Course.CourseCode)</div>
+                                    @* <div class="class-time">@studentCourse.Course.StartTime.ToString("HH:mm")</div> *@
+                                </div>
+                                <div class="attendance-action">
+                                    <button type="button" class="btn btn-primary attendance-btn" 
+                                            onclick="markAttendance(@studentCourse.CourseId)" 
+                                            id="btn-@studentCourse.CourseId">
+                                        <i class="fas fa-check me-2"></i>Katıldım
+                                    </button>
+                                    <div id="status-@studentCourse.CourseId" class="attendance-status"></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    Bugün için yoklama alınacak ders bulunmamaktadır.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function markAttendance(courseId) {
+            const button = document.getElementById(`btn-${courseId}`);
+            const statusDiv = document.getElementById(`status-${courseId}`);
+            
+            // Call the API to mark attendance
+            fetch('/Student/MarkAttendance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                },
+                body: JSON.stringify({ courseId: courseId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    button.classList.add('marked');
+                    button.innerHTML = '<i class="fas fa-check-circle me-2"></i>Katıldınız';
+                    statusDiv.innerHTML = '<span class="text-success">Yoklamanız alındı</span>';
+                } else {
+                    statusDiv.innerHTML = '<span class="text-danger">Bir hata oluştu</span>';
+                }
+            })
+            .catch(error => {
+                statusDiv.innerHTML = '<span class="text-danger">Bir hata oluştu</span>';
+                console.error('Error:', error);
+            });
+        }
+    </script>
+} 

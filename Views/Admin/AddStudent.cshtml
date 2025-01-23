@@ -1,0 +1,155 @@
+@{
+    ViewData["Title"] = "Kullanıcı Ekle";
+}
+
+<div class="container mt-4">
+    <h2>Kullanıcı Ekle</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <label class="form-label">Kullanıcı Tipi</label>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="userType" id="typeStudent" value="Student" checked onchange="handleUserTypeChange()">
+                            <label class="form-check-label" for="typeStudent">
+                                Öğrenci
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="userType" id="typeAdmin" value="Admin" onchange="handleUserTypeChange()">
+                            <label class="form-check-label" for="typeAdmin">
+                                Admin
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="studentFields">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Ad Soyad</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="studentNumber" class="form-label">Öğrenci Numarası</label>
+                        <input type="text" class="form-control" id="studentNumber" name="studentNumber">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-posta Adresi</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Fotoğraf</label>
+                        <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Durum</label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="statusActive" value="active" checked>
+                                <label class="form-check-label" for="statusActive">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="statusInactive" value="inactive">
+                                <label class="form-check-label" for="statusInactive">
+                                    Pasif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="adminFields" style="display: none;">
+                    <div class="mb-3">
+                        <label for="adminUsername" class="form-label">Kullanıcı Adı</label>
+                        <input type="text" class="form-control" id="adminUsername" name="adminUsername">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Şifre</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Kaydet
+                    </button>
+                    <a href="@Url.Action("Students", "Admin")" class="btn btn-secondary">
+                        <i class="fas fa-times me-2"></i>İptal
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function handleUserTypeChange() {
+            const isAdmin = document.getElementById('typeAdmin').checked;
+            const studentFields = document.getElementById('studentFields');
+            const adminFields = document.getElementById('adminFields');
+            
+            // Get all student-related inputs
+            const studentInputs = studentFields.querySelectorAll('input:not([type="radio"])');
+            const adminInputs = adminFields.querySelectorAll('input');
+            
+            if (isAdmin) {
+                studentFields.style.display = 'none';
+                adminFields.style.display = 'block';
+                
+                // Make student fields not required
+                studentInputs.forEach(input => {
+                    input.required = false;
+                });
+                
+                // Make admin fields required
+                adminInputs.forEach(input => {
+                    input.required = true;
+                });
+            } else {
+                studentFields.style.display = 'block';
+                adminFields.style.display = 'none';
+                
+                // Make student fields required
+                studentInputs.forEach(input => {
+                    if (input.id !== 'photo') { // Photo is optional
+                        input.required = true;
+                    }
+                });
+                
+                // Make admin fields not required
+                adminInputs.forEach(input => {
+                    input.required = false;
+                });
+            }
+        }
+
+        // Call once on page load to set initial state
+        handleUserTypeChange();
+    </script>
+} 

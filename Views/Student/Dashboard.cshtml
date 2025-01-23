@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="student-dashboard">
+    <div class="welcome-section">
+        <h1>Hoş Geldin, @ViewBag.StudentFullName</h1>
+        <p class="lead">YBS Yoklama Sistemine hoş geldiniz. Buradan derslerinizi ve yoklama durumunuzu takip edebilirsiniz.</p>
+    </div>
+
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <div class="stat-info">
+                <h3>@ViewBag.ActiveCourses</h3>
+                <p>Aktif Ders</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+                <h3>@ViewBag.AverageAttendance%</h3>
+                <p>Ortalama Katılım</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="stat-info">
+                <h3>@(ViewBag.UpcomingClasses?.Count ?? 0)</h3>
+                <p>Yaklaşan Dersler</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="upcoming-classes">
+        <h2>Yaklaşan Dersler</h2>
+        <div class="class-list">
+            @if (ViewBag.UpcomingClasses != null && ViewBag.UpcomingClasses.Count > 0)
+            {
+                foreach (var studentCourse in ViewBag.UpcomingClasses)
+                {
+                    <div class="class-item">
+                        <div class="class-time">@studentCourse.Course.StartTime.ToString("HH:mm")</div>
+                        <div class="class-info">
+                            <h4>@studentCourse.Course.CourseName (@studentCourse.Course.CourseCode)</h4>
+                            <p>@studentCourse.Course.Instructor</p>
+                        </div>
+                        <div class="class-status">
+                            <span class="badge bg-primary">@studentCourse.Course.DayOfWeek</span>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    Yaklaşan ders bulunmamaktadır.
+                </div>
+            }
+        </div>
+    </div>
+</div> 

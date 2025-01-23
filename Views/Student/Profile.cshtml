@@ -1,0 +1,117 @@
+@model YoklamaAlma.Models.Student
+
+@{
+    ViewData["Title"] = "Kişisel Bilgilerim";
+}
+
+<div class="profile-container">
+    <div class="profile-header">
+        <h1>Kişisel Bilgilerim</h1>
+        <p class="lead">Öğrenci bilgilerinizi görüntüleyebilirsiniz</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="profile-photo mb-3">
+                        <img src="@(string.IsNullOrEmpty(Model.PhotoUrl) ? "/images/default-avatar.png" : Model.PhotoUrl)" 
+                             alt="@Model.FullName" 
+                             class="rounded-circle img-fluid" 
+                             style="width: 150px; height: 150px; object-fit: cover;">
+                    </div>
+                    <h3 class="card-title">@Model.FullName</h3>
+                    <p class="text-muted">Öğrenci</p>
+                    <div class="student-status @(Model.IsActive ? "text-success" : "text-danger")">
+                        <i class="fas fa-circle"></i>
+                        @(Model.IsActive ? "Aktif" : "Pasif")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Öğrenci Bilgileri</h5>
+                    
+                    <div class="info-group">
+                        <label><i class="fas fa-id-card"></i> Öğrenci Numarası</label>
+                        <p>@Model.StudentNumber</p>
+                    </div>
+
+                    <div class="info-group">
+                        <label><i class="fas fa-envelope"></i> E-posta Adresi</label>
+                        <p>@Model.Email</p>
+                    </div>
+
+                    <div class="info-group">
+                        <label><i class="fas fa-graduation-cap"></i> Bölüm</label>
+                        <p>Yönetim Bilişim Sistemleri</p>
+                    </div>
+
+                    <div class="info-group">
+                        <label><i class="fas fa-university"></i> Fakülte</label>
+                        <p>İnegöl İşletme Fakültesi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    Bilgilerinizde bir hata olduğunu düşünüyorsanız, lütfen öğrenci işleri ile iletişime geçin.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.profile-header {
+    margin-bottom: 2rem;
+}
+
+.profile-header h1 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.info-group {
+    margin-bottom: 1.5rem;
+}
+
+.info-group label {
+    display: block;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+}
+
+.info-group label i {
+    margin-right: 0.5rem;
+    width: 20px;
+}
+
+.info-group p {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin: 0;
+    padding-left: 1.8rem;
+}
+
+.student-status {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.student-status i {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+}
+</style> 

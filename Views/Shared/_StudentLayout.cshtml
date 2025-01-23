@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - YBS Yoklama Sistemi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="student-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/Bursa_Uludağ_University_logo.svg.png" alt="Logo" class="sidebar-logo" />
+                <div class="student-info">
+                    <h5>Öğrenci Paneli</h5>
+                    <small>20210101001</small>
+                </div>
+            </div>
+            
+            <!-- Toggle Button -->
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <nav class="sidebar-nav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Dashboard" ? "active" : "")" 
+                           href="/Student/Dashboard">
+                            <i class="fas fa-home"></i>
+                            <span>Ana Sayfa</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Courses" ? "active" : "")" 
+                           href="/Student/Courses">
+                            <i class="fas fa-book"></i>
+                            <span>Derslerim</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Attendance" ? "active" : "")" 
+                           href="/Student/Attendance">
+                            <i class="fas fa-clipboard-check"></i>
+                            <span>Yoklama</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Profile" ? "active" : "")" 
+                           href="/Student/Profile">
+                            <i class="fas fa-user"></i>
+                            <span>Kişisel Bilgilerim</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Support" ? "active" : "")" 
+                           href="/Student/Support">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Yardım ve Destek</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-auto">
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="nav-link">
+                            <button type="submit" class="btn btn-link nav-link logout-link p-0">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Çıkış Yap</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            menuToggle.classList.toggle('collapsed');
+        });
+    </script>
+</body>
+</html> 

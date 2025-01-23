@@ -1,0 +1,168 @@
+@{
+    ViewData["Title"] = "Yardım ve Destek";
+}
+
+<div class="support-container">
+    <div class="support-header">
+        <h1>Yardım ve Destek</h1>
+        <p class="lead">Size nasıl yardımcı olabiliriz?</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Sık Sorulan Sorular</h5>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Yoklama nasıl alınır?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yoklama almak için "Yoklama" menüsüne gidin ve katıldığınız dersin yanındaki "Katıldım" butonuna tıklayın. 
+                                    Yoklamanız başarıyla kaydedildiğinde bir onay mesajı göreceksiniz.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Yoklama durumumu nasıl kontrol edebilirim?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    "Derslerim" menüsünden her ders için yoklama durumunuzu görebilirsiniz. 
+                                    Burada her ders için katılım yüzdenizi ve detaylı yoklama bilgilerinizi görüntüleyebilirsiniz.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Bilgilerimde bir hata var, ne yapmalıyım?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Öğrenci bilgilerinizde bir hata olduğunu düşünüyorsanız, lütfen öğrenci işleri ile iletişime geçin.
+                                    İletişim bilgilerini sağ taraftaki "İletişim Bilgileri" bölümünde bulabilirsiniz.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Teknik Destek</h5>
+                    <p>Sistemle ilgili teknik bir sorun yaşıyorsanız, lütfen aşağıdaki adımları izleyin:</p>
+                    <ol>
+                        <li>Tarayıcınızı yenileyin</li>
+                        <li>Çıkış yapıp tekrar giriş yapmayı deneyin</li>
+                        <li>Farklı bir tarayıcı kullanmayı deneyin</li>
+                        <li>Sorun devam ederse teknik destek ekibi ile iletişime geçin</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">İletişim Bilgileri</h5>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-university"></i>
+                            <div>
+                                <strong>Öğrenci İşleri</strong>
+                                <p>0224 XXX XX XX</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>E-posta</strong>
+                                <p>ogrenciisleri@uludag.edu.tr</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Çalışma Saatleri</strong>
+                                <p>Pazartesi - Cuma<br>09:00 - 17:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.support-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.support-header {
+    margin-bottom: 2rem;
+}
+
+.support-header h1 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    color: #4a90e2;
+    width: 24px;
+    text-align: center;
+    margin-top: 0.2rem;
+}
+
+.contact-item strong {
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.contact-item p {
+    margin: 0;
+    color: #666;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+}
+</style> 

@@ -1,0 +1,43 @@
+@model IEnumerable<YoklamaAlma.Models.Course>
+
+@{
+    ViewData["Title"] = "Yoklama Ekle";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <form asp-action="AddAttendance" method="post" class="mt-4">
+        <div class="form-group mb-3">
+            <label for="courseId">Ders Seçin:</label>
+            <select name="courseId" id="courseId" class="form-control" required>
+                <option value="">Ders seçiniz...</option>
+                @foreach (var course in Model)
+                {
+                    <option value="@course.Id">@course.CourseCode - @course.CourseName</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="classTime">Ders Tarihi ve Saati:</label>
+            <input type="datetime-local" id="classTime" name="classTime" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Yoklama Oluştur</button>
+    </form>
+</div> 

@@ -1,0 +1,71 @@
+@model IEnumerable<YoklamaAlma.Models.CourseViewModel>
+
+@{
+    ViewData["Title"] = "Derslerim";
+}
+
+<div class="courses-container">
+    <div class="courses-header">
+        <h1>Derslerim</h1>
+        <p class="lead">Bu dönem aldığınız derslerin listesi ve yoklama durumlarınız</p>
+    </div>
+
+    <div class="courses-table">
+        @if (Model != null && Model.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ders Adı</th>
+                        <th>Ders Kodu</th>
+                        <th>Yoklama Durumu</th>
+                        <th>Detaylar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model)
+                    {
+                        <tr>
+                            <td>@course.CourseName</td>
+                            <td>@course.CourseCode</td>
+                            <td>
+                                <div class="attendance-status">
+                                    <div class="progress">
+                                        <div class="progress-bar @(course.AttendancePercentage < 70 ? "bg-warning" : "")" 
+                                             role="progressbar" 
+                                             style="width: @course.AttendancePercentage%;" 
+                                             aria-valuenow="@course.AttendancePercentage" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
+                                            @($"{course.AttendancePercentage:F0}%")
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary" onclick="showCourseDetails(@course.CourseId)">
+                                    <i class="fas fa-info-circle"></i> Detaylar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                Henüz kayıtlı olduğunuz ders bulunmamaktadır.
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showCourseDetails(courseId) {
+            // TODO: Implement course details modal
+            alert('Ders detayları yakında eklenecektir.');
+        }
+    </script>
+} 

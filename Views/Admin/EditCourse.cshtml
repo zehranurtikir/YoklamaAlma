@@ -1,0 +1,97 @@
+@model YoklamaAlma.Models.Course
+
+@{
+    ViewData["Title"] = "Ders Düzenle";
+}
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1 class="admin-title">Ders Düzenle</h1>
+        <p class="admin-subtitle">Ders bilgilerini güncelleyin</p>
+    </div>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post" asp-action="EditCourse" asp-route-id="@Model.Id">
+                <div class="row">
+                    <!-- Ders Kodu -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="courseCode" class="form-label">Ders Kodu</label>
+                            <input type="text" class="form-control" id="courseCode" name="courseCode" 
+                                   value="@Model.CourseCode" required placeholder="Örn: YBS101">
+                        </div>
+                    </div>
+
+                    <!-- Ders Adı -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="courseName" class="form-label">Ders Adı</label>
+                            <input type="text" class="form-control" id="courseName" name="courseName" 
+                                   value="@Model.CourseName" required placeholder="Dersin tam adını giriniz">
+                        </div>
+                    </div>
+
+                    <!-- Kredi Sayısı -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="credits" class="form-label">Kredi Sayısı</label>
+                            <input type="number" class="form-control" id="credits" name="credits" 
+                                   value="@Model.Credits" required min="1" max="30">
+                        </div>
+                    </div>
+
+                    <!-- Dönem -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="semester" class="form-label">Dönem</label>
+                            <select class="form-select" id="semester" name="semester" required>
+                                <option value="">Seçiniz</option>
+                                @{
+                                    var semesters = new[] { "Güz", "Bahar", "Yaz" };
+                                    foreach (var sem in semesters)
+                                    {
+                                        <option value="@sem" selected="@(Model.Semester == sem)">@sem</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Kaydet
+                    </button>
+                    <a href="@Url.Action("Courses", "Admin")" class="btn btn-secondary ms-2">
+                        <i class="fas fa-times me-2"></i>İptal
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Add any JavaScript validation if needed
+        $(document).ready(function() {
+            $('form').on('submit', function() {
+                var credits = parseInt($('#credits').val());
+                if (credits < 1 || credits > 30) {
+                    alert('Kredi sayısı 1 ile 30 arasında olmalıdır.');
+                    return false;
+                }
+                return true;
+            });
+        });
+    </script>
+} 

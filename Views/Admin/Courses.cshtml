@@ -1,0 +1,87 @@
+@model IEnumerable<YoklamaAlma.Models.Course>
+
+@{
+    ViewData["Title"] = "Ders Listesi";
+}
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1 class="admin-title">Ders Listesi</h1>
+        <p class="admin-subtitle">Sistemde kayıtlı olan tüm derslerin listesi</p>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-end mb-3">
+                <a href="@Url.Action("AddCourse", "Admin")" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Yeni Ders Ekle
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ders Kodu</th>
+                            <th>Ders Adı</th>
+                            <th>Kredi Sayısı</th>
+                            <th>Dönem</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var course in Model)
+                            {
+                                <tr>
+                                    <td>@course.CourseCode</td>
+                                    <td>@course.CourseName</td>
+                                    <td>@course.Credits</td>
+                                    <td>@course.Semester</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <a href="@Url.Action("EditCourse", "Admin", new { id = course.Id })" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                                Düzenle
+                                            </a>
+                                            <form asp-action="DeleteCourse" asp-route-id="@course.Id" method="post" class="d-inline" 
+                                                  onsubmit="return confirm('Bu dersi silmek istediğinizden emin misiniz?');">
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                    Sil
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center">Henüz ders kaydı bulunmamaktadır.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> 
