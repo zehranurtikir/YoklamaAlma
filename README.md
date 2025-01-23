@@ -17,6 +17,12 @@ Bu proje, **İnegöl İşletme Fakültesi Yönetim Bilişim Sistemleri** bölüm
 - **Kişisel Bilgilerim**: Öğrencinin kendi bilgilerini görüntülemesi ve güncellemesi.
 
 ---
+## Takım
+
+- **Melisa Şengezer** 
+- **Zehra Nur**
+
+---
 
 ## 📂 Proje Yapısı
 
@@ -28,10 +34,3 @@ YoklamaAlmaSistemi/
 ├── wwwroot/              # Statik dosyalar (CSS, JS, resimler)
 ├── appsettings.json      # Veritabanı bağlantı ayarları
 └── README.md             # Proje hakkında bilgiler
-
----
-## Takım
-
-- **Melisa Şengezer** 
-- **Zehra Nur** 
-
