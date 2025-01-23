@@ -1,0 +1,17 @@
+/* Typography styles */
+.display-4 {
+  color: #212529;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  color: #212529;
+  font-size: 1.8rem;
+}
+
+.lead {
+  color: #495057;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+} 

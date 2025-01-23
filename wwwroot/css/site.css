@@ -1,0 +1,35 @@
+/* Import CSS modules */
+@import url('styles/variables.css');
+@import url('styles/base.css');
+@import url('styles/navbar.css');
+@import url('styles/typography.css');
+@import url('styles/main-page.css');
+@import url('styles/login.css');
+@import url('styles/admin.css');
+@import url('styles/privacy.css');
+@import url('styles/student.css');
+
+/* Admin Logout Button */
+.logout-link {
+    color: #e74c3c !important;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.logout-link:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #c0392b !important;
+}
+
+.logout-link i {
+    width: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+}
