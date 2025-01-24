@@ -20,7 +20,7 @@ Bu proje, **İnegöl İşletme Fakültesi Yönetim Bilişim Sistemleri** bölüm
 ## Takım
 
 - **Melisa Şengezer** 
-- **Zehra Nur**
+- **Zehra Nur Tıkır**
 
 ---
 
